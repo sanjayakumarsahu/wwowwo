@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+	<Properties>
+		<Property name="logPath">data-services/logs/</Property>
+		<Property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+		</Property>
+		<Property name="logLevel">info</Property>
+		<Property name="logFileName">service.events.ws.log</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT">
+			<PatternLayout pattern="${PATTERN}" />
+		</Console>
+		<RollingFile name="Rolling-Appender" fileName="${sys:logPath}/${logFileName}"
+			filePattern="${sys:logPath}/${logFileName}.%d{yyyy-MM-dd-hh-mm}">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.springframework" level="${logLevel}" additivity="false">
+			<AppenderRef ref="Rolling-Appender" />
+			<AppenderRef ref="Console-Appender" />
+		</Logger>
+		<Logger name="com.geaviation.eds.service" level="${logLevel}"
+			additivity="false">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="Rolling-Appender" />
+		</Logger>
+		<Root>
+			<AppenderRef ref="Console-Appender" />
+		</Root>
+	</Loggers>
+</Configuration>

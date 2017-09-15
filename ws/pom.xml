@@ -1,0 +1,205 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gea.eds.service</groupId>
+		<artifactId>service.events.parent</artifactId>
+		<version>4.0.0</version>
+	</parent>
+	<artifactId>service.events.ws</artifactId>
+	<name>Events Services WS</name>
+	<version>${service.events.ws.version}</version>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-jetty</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-jetty</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.app</artifactId>
+			<version>${service.events.app.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.data</artifactId>
+			<version>${service.events.data.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.api</artifactId>
+			<version>${service.events.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.model</artifactId>
+			<version>${service.events.model.version}</version>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.common</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+		</dependency>
+		
+		
+		<dependency>
+				<groupId>com.ge.ae</groupId>
+	  			<artifactId>greenplum.jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ge.ae</groupId>
+			<artifactId>oracle.ojdbc14</artifactId>
+		</dependency>
+		
+       <dependency>
+				<groupId>com.ge.ae</groupId>
+	  			<artifactId>greenplum.jdbc</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- ADDED DIRECTORY PATH TO TAKE RESOURCE FILES -->
+		<resources>
+			<resource>
+				<directory>${basedir}/target/resources/swagger/</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources/</directory>
+			</resource>
+			<resource>
+				<directory>${service.commons.resources}</directory>
+			</resource>
+		</resources>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+				<source>${project.java.source.jdk.ver}</source>
+				<target>${project.java.target.jdk.ver}</target>
+				</configuration>
+			</plugin>
+
+			
+			<!-- PLUGIN ADDED FOR FILE RENAME FOR SWAGGER -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>package</id>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+
+								<copy file="${basedir}/target/resources/swagger.json"
+									tofile="${basedir}/target/resources/swagger/events.json" />
+							</tasks>
+						</configuration>
+
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- PLUGIN ADDED TO COPY RESOURCES IN JAR FILE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>				
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+		</plugins>
+	</build>
+
+
+</project>

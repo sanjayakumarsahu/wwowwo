@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gea.eds.service</groupId>
+		<artifactId>service.events.parent</artifactId>
+		<version>4.0.0</version>
+	</parent>
+	<artifactId>service.events.app</artifactId>
+	<name>Events Services APP</name>
+	<version>${service.events.app.version}</version>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.data</artifactId>
+			<version>${service.events.data.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.model</artifactId>
+			<version>${service.events.model.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>eds.master.data</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>eds.master.model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gea.eds.service</groupId>
+			<artifactId>service.events.data</artifactId>
+			<version>${service.events.data.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${project.java.source.jdk.ver}</source>
+					<target>${project.java.target.jdk.ver}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
