@@ -1,29 +1,53 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.gea.eds.service</groupId>
-    <artifactId>dds.services.parent</artifactId>
-    <version>4.0.0</version>
-  </parent>
-  <artifactId>service.events.parent</artifactId>
-  <name>Events Services</name>
-  <description>Events Services</description>
-  <packaging>pom</packaging>
-  <version>4.0.0</version>
-  <groupId>com.gea.eds.service</groupId>
-  <properties>
-		<service.events.api.version>4.1.4</service.events.api.version>
-		<service.events.app.version>4.1.8</service.events.app.version>
-		<service.events.data.version>4.1.10</service.events.data.version>
-		<service.events.model.version>4.1.6</service.events.model.version>
-		<service.events.ws.version>4.1.11</service.events.ws.version>
-  </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.geaviation.eds.service</groupId>
+		<artifactId>service.common.parent</artifactId>
+		<version>4.0.0</version>
+	</parent>
+	<artifactId>service.common</artifactId>
+	<groupId>com.geaviation.eds.service</groupId>
+	<version>${service.common.version}</version>
+	<name>DDS Service Common</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+		</dependency>
 		
-  <modules>
-  	<module>service.events.api</module>
-  	<module>service.events.app</module>
-  	<module>service.events.data</module>
-  	<module>service.events.model</module>
-  	<module>service.events.ws</module>
-  </modules>
+		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpclient</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>		    
+		</dependency>
+		
+	</dependencies>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				
+				<configuration>
+					<source>${project.java.source.jdk.ver}</source>
+					<target>${project.java.target.jdk.ver}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
